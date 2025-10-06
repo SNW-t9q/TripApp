@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/gray_bottom_nav" />  <!-- 半透明白色，可改 -->
+    <corners android:radius="40dp" />    <!-- 圆角 -->
+</shape>

@@ -1,5 +1,6 @@
 package com.example.tripapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         // 登录成功
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
         // 这里可以跳转到主页面或其他操作
+        startActivity(new Intent(this, MainActivity.class));
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.tripapp.Activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -100,6 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (result != -1) {
             Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
             // 可以在这里跳转到登录页面或主页面
+            startActivity(new Intent(this, MainActivity.class));
         } else {
             Toast.makeText(this, "注册失败，请稍后重试", Toast.LENGTH_SHORT).show();
         }
