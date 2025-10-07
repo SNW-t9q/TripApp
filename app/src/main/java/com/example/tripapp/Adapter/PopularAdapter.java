@@ -18,13 +18,21 @@ import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
 
+    private static final int VIEW_TYPE_LIST = 0;
+    private static final int VIEW_TYPE_GRID = 1;
     private Context context;
     private List<PopularItem> popularList;
+    private boolean isGrid;
 
     // 构造函数
-    public PopularAdapter(Context context, List<PopularItem> popularList) {
+    public PopularAdapter(Context context, List<PopularItem> popularList, boolean isGrid) {
         this.context = context;
         this.popularList = popularList;
+        this.isGrid = isGrid;
+    }
+
+    public void setGrid(boolean isGrid) {
+        this.isGrid = isGrid;
     }
 
     // ViewHolder：保存 item 中的控件引用
@@ -43,12 +51,25 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
         }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return isGrid ? VIEW_TYPE_GRID : VIEW_TYPE_LIST;
+    }
+
     @NonNull
     @Override
     public PopularAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // 创建 item 视图
-        View view = LayoutInflater.from(context).inflate(R.layout.viewholder, parent, false);
+        View view;
+        if (viewType == VIEW_TYPE_LIST) {
+            view = LayoutInflater.from(context)
+                    .inflate(R.layout.item_list, parent, false);
+        } else {
+            view = LayoutInflater.from(context)
+                    .inflate(R.layout.item_grid, parent, false);
+        }
         return new ViewHolder(view);
+
     }
 
     @Override
@@ -62,11 +83,18 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
         holder.ivLove.setOnClickListener(v -> {
             holder.ivLove.setSelected(!holder.ivLove.isSelected());
         });
-
         // 使用 Glide 加载网络图片
-        Glide.with(context)
-                .load(item.getPic().get(0))
-                .into(holder.ivPic);
+        if(item.getPic() != null && !item.getPic().isEmpty()){
+            Glide.with(context)
+                    .load(item.getPic().get(0))
+                    .error(R.drawable.loading)
+                    .into(holder.ivPic);
+        }else {
+            Glide.with(context)
+                    .load(R.drawable.loading)
+                    .into(holder.ivPic);
+        }
+
     }
 
     @Override

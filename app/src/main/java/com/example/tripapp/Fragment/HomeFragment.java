@@ -5,14 +5,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.transition.TransitionManager;
 
 import com.example.tripapp.Adapter.PopularAdapter;
 import com.example.tripapp.R;
@@ -41,8 +44,9 @@ public class HomeFragment extends Fragment {
 
     private OkHttpClient client = new OkHttpClient();
     private Call currentCall;
+    private boolean isGrid = true;
 
-    // 你的接口（换成真实地址）
+    // 接口
     private final String url = "http://8.138.243.249:8080/spots";
 
     @Nullable
@@ -53,13 +57,34 @@ public class HomeFragment extends Fragment {
 
         recyclerView = root.findViewById(R.id.recycleview); // 注意你的布局里 id 是 recycleview
         progressBar = root.findViewById(R.id.ProgressBar);
-
+        ImageView change = root.findViewById(R.id.iv_change);
         // 瀑布流，2列，竖向
-        StaggeredGridLayoutManager lm =
+        RecyclerView.LayoutManager lm =
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        // 切换列表和网格
+        change.setOnClickListener(v -> {
+            if(!isGrid){
+                RecyclerView.LayoutManager glm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(glm);
+                change.setImageResource(R.drawable.icon_grid);
+            }else{
+                RecyclerView.LayoutManager llm = new LinearLayoutManager(HomeFragment.this.getContext(), LinearLayoutManager.VERTICAL,false);
+                recyclerView.setLayoutManager(llm);
+                change.setImageResource(R.drawable.icon_list);
+            }
+            isGrid = !isGrid;
+            adapter.setGrid(isGrid);
+            //淡入淡出动画
+            TransitionManager.beginDelayedTransition(recyclerView);
+
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
+                recyclerView.getRecycledViewPool().clear();
+            }
+        });
         recyclerView.setLayoutManager(lm);
 
-        adapter = new PopularAdapter(requireContext(), popularList);
+        adapter = new PopularAdapter(requireContext(), popularList,isGrid);
         recyclerView.setAdapter(adapter);
 
         fetchPopularData();
@@ -82,7 +107,7 @@ public class HomeFragment extends Fragment {
                 e.printStackTrace();
                 if (getActivity() != null) {
                     getActivity().runOnUiThread(() -> {
-                        progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.VISIBLE);
                         Toast.makeText(getContext(), "网络请求失败: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
                 }

@@ -6,17 +6,17 @@ import java.io.Serializable;
 import java.util.List;
 
 public class PopularItem implements Serializable {
-    @SerializedName("id") private String id;
-    @SerializedName("address") private String address;
-    @SerializedName("bed") private int bed;
-    @SerializedName("dateTour") private String dateTour;
-    @SerializedName("description") private String description;
-    @SerializedName("distance") private String distance;
-    @SerializedName("duration") private String duration;
-    @SerializedName("price") private int price;
-    @SerializedName("score") private double score;
-    @SerializedName("tourCount") private String tourCount;
-    @SerializedName("title") private String title;
+    @SerializedName("id") private String id = "";
+    @SerializedName("address") private String address = "";
+    @SerializedName("bed") private int bed = 0;
+    @SerializedName("dateTour") private String dateTour = "";
+    @SerializedName("description") private String description = "这个人很懒，什么都没有写";
+    @SerializedName("distance") private String distance = "";
+    @SerializedName("duration") private String duration = "";
+    @SerializedName("price") private int price = 0;
+    @SerializedName("score") private double score = 0.0;
+    @SerializedName("tourCount") private String tourCount = "";
+    @SerializedName("title") private String title = "";
     @SerializedName("pic") private List<String> pic;
 
     public PopularItem() {}
