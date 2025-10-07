@@ -88,9 +88,12 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         fetchPopularData();
+        initEvent();
 
         return root;
     }
+
+
 
     private void fetchPopularData() {
         progressBar.setVisibility(View.VISIBLE);
@@ -159,6 +162,10 @@ public class HomeFragment extends Fragment {
         if (currentCall != null && !currentCall.isCanceled()) {
             currentCall.cancel();
         }
+    }
+
+
+    private void initEvent() {
     }
 }
 

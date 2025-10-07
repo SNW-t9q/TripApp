@@ -1,6 +1,7 @@
 package com.example.tripapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide; // 用来加载网络图片
+import com.example.tripapp.Activities.PopularDetailActivity;
 import com.example.tripapp.Bean.PopularItem;
 import com.example.tripapp.R;
 
@@ -94,6 +96,12 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
                     .load(R.drawable.loading)
                     .into(holder.ivPic);
         }
+        // item 点击事件
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, PopularDetailActivity.class);
+            intent.putExtra("popular_item", item); // 把对象传过去
+            context.startActivity(intent);
+        });
 
     }
 

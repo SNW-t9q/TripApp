@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="translucent_bg">#9A000000</color>
     <!--  -->
     <color name="gray">#E0DFDF</color>
     <color name="gray_intro">#767676</color>
@@ -11,6 +12,7 @@
 
     <color name="indicator_color">@color/blue_300</color>
 
+    <color name="blue_50">#E1F5FE</color>
     <color name="blue_200">#90CAF9</color>
     <color name="blue_300">#4FC3F7</color>
     <color name="blue_400">#42A5F5</color>

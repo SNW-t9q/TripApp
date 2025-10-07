@@ -18,6 +18,15 @@ public class PopularItem implements Serializable {
     @SerializedName("tourCount") private String tourCount = "";
     @SerializedName("title") private String title = "";
     @SerializedName("pic") private List<String> pic;
+    @SerializedName("tourGuideName") private String tourGuideName = "";
+
+    public String getTourGuideName() {
+        return tourGuideName;
+    }
+
+    public void setTourGuideName(String tourGuideName) {
+        this.tourGuideName = tourGuideName;
+    }
 
     public PopularItem() {}
 
