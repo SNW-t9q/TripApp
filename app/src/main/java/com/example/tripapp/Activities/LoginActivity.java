@@ -80,7 +80,10 @@ public class LoginActivity extends AppCompatActivity {
         // 登录成功
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
         // 这里可以跳转到主页面或其他操作
-        startActivity(new Intent(this, MainActivity.class));
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish(); // 如果需要关闭当前Activity
     }
 
 }

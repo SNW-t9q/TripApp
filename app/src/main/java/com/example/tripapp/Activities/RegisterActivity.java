@@ -97,7 +97,10 @@ public class RegisterActivity extends AppCompatActivity {
         if (result != -1) {
             Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
             // 可以在这里跳转到登录页面或主页面
-            startActivity(new Intent(this, MainActivity.class));
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish(); // 如果需要关闭当前Activity
         } else {
             Toast.makeText(this, "注册失败，请稍后重试", Toast.LENGTH_SHORT).show();
         }

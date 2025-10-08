@@ -25,8 +25,14 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
     private Context context;
     private List<PopularItem> popularList;
     private boolean isGrid;
+    private int isMine = 0;
 
     // 构造函数
+    public PopularAdapter(Context context, List<PopularItem> popularList, int isMine) {
+        this.context = context;
+        this.popularList = popularList;
+        this.isMine = isMine;
+    }
     public PopularAdapter(Context context, List<PopularItem> popularList, boolean isGrid) {
         this.context = context;
         this.popularList = popularList;
@@ -64,11 +70,17 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
         // 创建 item 视图
         View view;
         if (viewType == VIEW_TYPE_LIST) {
-            view = LayoutInflater.from(context)
+            if(isMine == 1){
+                view = LayoutInflater.from(context)
+                        .inflate(R.layout.item_list_mine, parent, false);
+            }else {
+                view = LayoutInflater.from(context)
                     .inflate(R.layout.item_list, parent, false);
+            }
+
         } else {
-            view = LayoutInflater.from(context)
-                    .inflate(R.layout.item_grid, parent, false);
+                view = LayoutInflater.from(context)
+                        .inflate(R.layout.item_grid, parent, false);
         }
         return new ViewHolder(view);
 
@@ -78,13 +90,16 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
     public void onBindViewHolder(@NonNull PopularAdapter.ViewHolder holder, int position) {
         // 绑定数据
         PopularItem item = popularList.get(position);
-        holder.tvTitle.setText(item.getTitle());
-        holder.tvAddress.setText(item.getAddress());
-        holder.tvScore.setText(item.getScore() + "");
-        holder.tvPrice.setText("￥" + item.getPrice());
-        holder.ivLove.setOnClickListener(v -> {
-            holder.ivLove.setSelected(!holder.ivLove.isSelected());
-        });
+
+        if(isMine != 1){
+            holder.tvTitle.setText(item.getTitle());
+            holder.tvAddress.setText(item.getAddress());
+            holder.tvScore.setText(item.getScore() + "");
+            holder.tvPrice.setText("￥" + item.getPrice());
+            holder.ivLove.setOnClickListener(v -> {
+                holder.ivLove.setSelected(!holder.ivLove.isSelected());
+            });
+        }
         // 使用 Glide 加载网络图片
         if(item.getPic() != null && !item.getPic().isEmpty()){
             Glide.with(context)

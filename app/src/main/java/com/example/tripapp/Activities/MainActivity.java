@@ -1,5 +1,6 @@
 package com.example.tripapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tripapp.Adapter.MyFragmentPagerAdapter;
 import com.example.tripapp.Fragment.HomeFragment;
+import com.example.tripapp.Fragment.MineFragment;
+import com.example.tripapp.Fragment.MyLoveFragment;
+import com.example.tripapp.Fragment.SchedualFragment;
 import com.example.tripapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -33,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), 0);
             return insets;
         });
-
         initView();
         initData();
         initEvent();
@@ -59,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentList = new ArrayList<>();
         // 1.添加主页fragment
         fragmentList.add(new HomeFragment());
+        fragmentList.add(new MyLoveFragment());
+        fragmentList.add(new SchedualFragment());
+        fragmentList.add(new MineFragment());
     }
     private void initEvent() {
         bottomNavigationView.setOnItemSelectedListener(item -> {

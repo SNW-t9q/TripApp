@@ -6,6 +6,7 @@
     <!--  -->
     <color name="gray">#E0DFDF</color>
     <color name="gray_intro">#767676</color>
+    <color name="gray_mine_fragment">#EFEFEF</color>
     <color name="gray_bottom_nav">#59000000</color>
 
     <color name="green_50">#F1F8E9</color>

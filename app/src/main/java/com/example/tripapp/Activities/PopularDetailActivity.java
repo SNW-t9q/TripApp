@@ -67,7 +67,7 @@ public class PopularDetailActivity extends AppCompatActivity {
             duration = item.getDuration();
             distance = item.getDistance();
             bed = item.getBed();
-            guideName = item.getTourGuideName().equals("") ? "暂无" : item.getTourGuideName();
+            guideName = item.getTourGuideName().equals("") ? "张三" : item.getTourGuideName();
 
             tv_title.setText(item.getTitle());
             tv_location.setText(item.getAddress());
